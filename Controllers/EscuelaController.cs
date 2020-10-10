@@ -1,10 +1,19 @@
 ﻿using System;
+using Microsoft.AspNetCore.Mvc;
+using WebCore.Models;
+
 namespace WebCore.Controllers
 {
-    public class EscuelaController
+    public class EscuelaController : Controller
     {
-        public EscuelaController()
+        public IActionResult Index()
         {
+            var escuela = new Escuela();
+
+            escuela.AñoFundacion = 1998;
+            escuela.EscuelaId = Guid.NewGuid().ToString();
+            escuela.Nombre = "Academia Kadic";
+            return View(escuela);
         }
     }
 }
