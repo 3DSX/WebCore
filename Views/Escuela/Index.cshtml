@@ -1,12 +1,13 @@
-﻿@model Escuela
+﻿@model EscuelaModel
 
 @{
     ViewData["Title"] = "Escuela Homepage";
+    Layout = "SimpleLayout";
 }
 
 <div class="text-center">
     <h1 class="display-4">@Model.Nombre</h1>
-    <p class="small">ID: @Model.EscuelaId</p>
-    <p class="small">Creación: @Model.AñoFundacion</p>
+    <p class="small">ID: @Model.UniqueId</p>
+    <p class="small">Creación: @Model.YearOfCreation</p>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

@@ -8,11 +8,14 @@ namespace WebCore.Controllers
     {
         public IActionResult Index()
         {
-            var escuela = new Escuela();
+            var escuela = new EscuelaModel
+            {
+                YearOfCreation = 1998,
+                UniqueId = Guid.NewGuid().ToString(),
+                Nombre = "Academia Kadic"
+            };
 
-            escuela.AñoFundacion = 1998;
-            escuela.EscuelaId = Guid.NewGuid().ToString();
-            escuela.Nombre = "Academia Kadic";
+            ViewBag.halloween = "Voces";
             return View(escuela);
         }
     }
