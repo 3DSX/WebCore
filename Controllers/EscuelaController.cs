@@ -12,7 +12,11 @@ namespace WebCore.Controllers
             {
                 YearOfCreation = 1998,
                 UniqueId = Guid.NewGuid().ToString(),
-                Nombre = "Academia Kadic"
+                Nombre = "Academia Kadic",
+                Ciudad = "París",
+                TipoEscuela = TiposEscuelaModel.Bachillerato,
+                Direccion = "La Mezquita",
+                Pais = "Francia"
             };
 
             ViewBag.halloween = "Voces";
