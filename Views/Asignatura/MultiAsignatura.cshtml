@@ -1,0 +1,14 @@
+﻿@model List<AsignaturaModel>
+
+@{
+    ViewData["Title"] = "Vista de Asignaturas Múltiples";
+    Layout = "SimpleLayout";
+}
+
+<div class="text-center">
+
+    <partial name="ParentEntityList" />
+
+    <p>Fecha: @DateTime.Now</p>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a></p>
+</div>

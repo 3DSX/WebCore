@@ -1,0 +1,19 @@
+﻿@model AsignaturaModel
+
+@{
+    ViewData["Title"] = "Vista de Asignatura";
+    Layout = "SimpleLayout";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Asignatura: @Model.Nombre</h1>
+    <p class="small">ID: @Model.UniqueId</p>
+    <p class="small">Fecha: @ViewBag.Fecha</p>
+</div>
+
+<div class="text-center">
+    <h1>Asignatura Vista Parcial</h1>
+    <partial name="ParentEntity" />
+
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
