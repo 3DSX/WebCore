@@ -6,5 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Escuela\" />
+    <Folder Include="Views\Asignatura\" />
+    <Folder Include="Views\Alumno\" />
   </ItemGroup>
 </Project>
