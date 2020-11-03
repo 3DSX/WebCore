@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Escuela Homepage";
+    ViewData["Description"] = "Academia Kadik 2020";
     Layout = "SimpleLayout";
 }
 
@@ -9,5 +10,11 @@
     <h1 class="display-4">@Model.Nombre</h1>
     <p class="small">ID: @Model.UniqueId</p>
     <p class="small">Creación: @Model.YearOfCreation</p>
+    <address>
+        <p>Dirección: @Model.Direccion</p>
+        <p>País: @Model.Pais</p>
+        <p>Ciudad: @Model.Ciudad</p>
+        <p>Tipo: @Model.TipoEscuela</p>
+    </address>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
