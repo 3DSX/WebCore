@@ -52,7 +52,7 @@ namespace WebCore.Controllers
             }
             else
             {
-                TempData["Mensaje"] = $"El curso que intentaste editar no existe";
+                TempData["Mensaje"] = "El curso que intentaste editar no existe";
                 return RedirectToAction("Index");
             }
         }
@@ -60,44 +60,39 @@ namespace WebCore.Controllers
         [HttpPost]
         public IActionResult Edit(string id, CursoModel curso)
         {
-            if (id != null && curso != null)
+            if (curso != null)
             {
                 var cursoEncontrado = from CursoModel cur in _context.Cursos
                                       where cur.UniqueId == id
                                       select cur;
 
-                if (ModelState.IsValid)
+                if (cursoEncontrado.Count() != 0)
                 {
-                    if (cursoEncontrado.Count() != 0)
+                    if (ModelState.IsValid)
                     {
                         CursoModel cursObj = cursoEncontrado.SingleOrDefault();
                         curso.UniqueId = cursObj.UniqueId;
+                        curso.EscuelaModelUniqueId = cursObj.EscuelaModelUniqueId;
 
                         _context.Remove(cursObj);
                         _context.Add(curso);
                         _context.SaveChanges();
 
-                        ViewBag.ResultMessage = $"El curso {curso.Nombre} ha sido editado en la DB";
-
-                        return View("Index", curso);
-                    }
-                    else
-                    {
-
-                        TempData["Mensaje"] = $"El curso que intentaste editar no existe";
+                        TempData["Mensaje"] = $"El curso {curso.Nombre} ha sido editado en la DB";
 
                         return RedirectToAction("Index");
                     }
+                    else
+                        return View(cursoEncontrado.SingleOrDefault());
+
                 }
                 else
                 {
-                    return View();
+                    TempData["Mensaje"] = "El curso que intentaste editar no existe";
+                    return RedirectToAction("Index");
                 }
             }
-            else
-            {
-                return RedirectToAction("Index");
-            }
+            else return RedirectToAction("Index");
 
         }
 
@@ -110,8 +105,26 @@ namespace WebCore.Controllers
             if (cursoEncontrado.Count() != 0)
             {
                 CursoModel curso = cursoEncontrado.SingleOrDefault();
+
+                Each<AlumnoModel>(_context.Alumnos, alumno =>
+                {
+                    if (alumno.CursoModelUniqueId == curso.UniqueId)
+                    {
+                        _context.Remove(alumno);
+                    }
+                });
+
+                Each<AsignaturaModel>(_context.Asignaturas, asignatura =>
+                {
+                    if (asignatura.CursoModelUniqueId == curso.UniqueId)
+                    {
+                        _context.Remove(asignatura);
+                    }
+                });
+
                 _context.Remove(curso);
                 _context.SaveChanges();
+
 
                 TempData["Mensaje"] = $"El curso {curso.Nombre} ha sido eliminado en la DB";
                 return RedirectToAction("Index");
@@ -149,6 +162,12 @@ namespace WebCore.Controllers
         public CursoController(EscuelaContext context) : base(context)
         {
 
+        }
+
+        private static void Each<T>(IEnumerable<T> items, Action<T> action)
+        {
+            foreach (var item in items)
+                action(item);
         }
     }
 }

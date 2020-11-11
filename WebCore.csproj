@@ -8,5 +8,10 @@
     <Folder Include="Views\Escuela\" />
     <Folder Include="Views\Asignatura\" />
     <Folder Include="Views\Alumno\" />
+    <Folder Include="Views\Curso\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
   </ItemGroup>
 </Project>
