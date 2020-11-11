@@ -1,0 +1,28 @@
+﻿@model CursoModel
+
+@{
+    ViewData["Title"] = "Crear Curso";
+    Layout = "SimpleLayout";
+}
+
+
+<form class="text-center" method="POST">
+    <div asp-validation-summary="All"></div>
+    <div>
+        <label asp-for="Nombre" class="display-4"></label>
+        <input asp-for="Nombre" />
+    </div>
+    <div>
+        <label asp-for="Jornada" class="display-4"></label>
+        @Html.DropDownList(
+       "Jornada", Html.GetEnumSelectList<TiposJornadaModel>(),
+       "Selecciona Jornada", new { @class = "form-control" }
+       )
+    </div>
+    <input type="submit" />
+</form>
+
+<div class="text-center">
+    <p>Fecha: @DateTime.Now</p>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

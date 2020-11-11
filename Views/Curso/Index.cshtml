@@ -1,0 +1,26 @@
+﻿@model CursoModel
+
+@{
+    ViewData["Title"] = "Vista de Cursos";
+    Layout = "SimpleLayout";
+}
+
+@if (ViewBag.ResultMessage != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.ResultMessage
+    </div>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Nombre: @Model.Nombre</h1>
+    <p class="small">ID: @Model.UniqueId</p>
+    <p class="small">Fecha: @DateTime.Now</p>
+</div>
+
+<div class="text-center">
+    <h1>Curso Vista Parcial</h1>
+    <partial name="ParentEntity" />
+
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

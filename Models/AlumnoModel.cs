@@ -8,9 +8,6 @@ namespace WebCore.Models
     {
         public List<EvaluacionModel> Evaluaciones { get; set; }
 
-        public string CursoModelUniqueId { get; set; }
-        public CursoModel Curso { get; set; }
-
         public AlumnoModel() => UniqueId = Guid.NewGuid().ToString();
 
     }

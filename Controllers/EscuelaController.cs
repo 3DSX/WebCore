@@ -1,23 +1,26 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using WebCore.Models;
 
 namespace WebCore.Controllers
 {
-    public class EscuelaController : ParentController
+    public class EscuelaController : Controller
     {
         public IActionResult Index()
         {
-            ViewBag.halloween = "La Monja";
+            var escuela = new EscuelaModel
+            {
+                YearOfCreation = 1998,
+                UniqueId = Guid.NewGuid().ToString(),
+                Nombre = "Academia Kadic",
+                Ciudad = "París",
+                TipoEscuela = TiposEscuelaModel.Bachillerato,
+                Direccion = "La Mezquita",
+                Pais = "Francia"
+            };
 
-            return View(_context.Escuelas.FirstOrDefault());
+            ViewBag.halloween = "Voces";
+            return View(escuela);
         }
-
-        public EscuelaController(EscuelaContext context) : base(context)
-        {
-
-        }
-
     }
 }

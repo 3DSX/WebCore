@@ -1,46 +1,40 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using WebCore.Models;
 
 namespace WebCore.Controllers
 {
-    public class AsignaturaController : ParentController
+    public class AsignaturaController : Controller
     {
-        [Route("Asignatura/Index")]
-        [Route("Asignatura/{asignaturaId?}")]
-        public IActionResult Index(string asignaturaId)
+        public IActionResult Index()
         {
+            var asignatura = new AsignaturaModel
+            {
+                Nombre = "Física o Química"
+            };
+
             ViewBag.Fecha = DateTime.Now;
 
-            if (!string.IsNullOrWhiteSpace(asignaturaId))
-            {
-                var asignaturaChosen = from asignatura in _context.Asignaturas
-                                       where asignatura.UniqueId == asignaturaId
-                                       select asignatura;
+            return View(asignatura);
 
-                if (asignaturaChosen.Count() != 0)
-                    return View(asignaturaChosen.SingleOrDefault());
-                else
-                    return View(new AsignaturaModel { Nombre = "Not Found", UniqueId = "Not Found" });
-            }
-            else
-            {
-                return View("MultiAsignatura", _context.Asignaturas);
-            }
         }
 
         public IActionResult MultiAsignatura()
         {
 
-            return View(_context.Asignaturas);
-        }
+            List<AsignaturaModel> asignaturas = new List<AsignaturaModel>
+            {
+                    new AsignaturaModel() {Nombre = "Francés"},
+                    new AsignaturaModel() {Nombre = "Español"},
+                    new AsignaturaModel() {Nombre = "Inglés"},
+                    new AsignaturaModel() {Nombre = "Química"},
+                    new AsignaturaModel() {Nombre = "Matemáticas"},
+                    new AsignaturaModel() {Nombre = "E.F"},
+                    new AsignaturaModel() {Nombre = "Programación"}
+            };
 
-
-        public AsignaturaController(EscuelaContext context) : base(context)
-        {
-
+            return View(asignaturas);
         }
     }
 }
