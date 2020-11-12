@@ -8,6 +8,7 @@ namespace WebCore.Controllers
 {
     public class CursoController : ParentController
     {
+        //GET
         [Route("Curso/{id?}")]
         public IActionResult Index(string id)
         {
@@ -28,17 +29,20 @@ namespace WebCore.Controllers
             }
         }
 
+        //GET
         public IActionResult MultiCurso()
         {
 
             return View(_context.Cursos);
         }
 
+
+        //GET
         public IActionResult Create()
         {
             return View();
         }
-
+        //GET
         public IActionResult Edit(string id)
         {
             var cursoEncontrado = from CursoModel curso in _context.Cursos
@@ -57,6 +61,7 @@ namespace WebCore.Controllers
             }
         }
 
+        // POST
         [HttpPost]
         public IActionResult Edit(string id, CursoModel curso)
         {
@@ -68,9 +73,9 @@ namespace WebCore.Controllers
 
                 if (cursoEncontrado.Count() != 0)
                 {
+                    CursoModel cursObj = cursoEncontrado.SingleOrDefault();
                     if (ModelState.IsValid)
                     {
-                        CursoModel cursObj = cursoEncontrado.SingleOrDefault();
                         curso.UniqueId = cursObj.UniqueId;
                         curso.EscuelaModelUniqueId = cursObj.EscuelaModelUniqueId;
 
@@ -96,6 +101,7 @@ namespace WebCore.Controllers
 
         }
 
+        // GET
         public IActionResult Delete(string id)
         {
             var cursoEncontrado = from CursoModel curso in _context.Cursos
@@ -136,6 +142,7 @@ namespace WebCore.Controllers
             }
         }
 
+        // POST
         [HttpPost]
         public IActionResult Create(CursoModel curso)
         {
@@ -158,7 +165,7 @@ namespace WebCore.Controllers
             }
         }
 
-
+        // DI
         public CursoController(EscuelaContext context) : base(context)
         {
 
